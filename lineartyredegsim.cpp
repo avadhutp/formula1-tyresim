@@ -4,11 +4,11 @@ using namespace std;
 int Loopingcount()
 {
     double Laptime, Basetime, lapcount, Degrate, TotalLaptime;
-    cout<<"Enter the number of laps in the stint";
+    cout<<"Enter the number of laps in the stint: ";
     cin>>lapcount;
-    cout<<"Enter the current Lap time of the driver";
+    cout<<"Enter the current Lap time of the driver: ";
     cin>>Basetime;
-    cout<<"Enter the current rate of degradation of the track";
+    cout<<"Enter the current rate of degradation of the track: ";
     cin>>Degrate;
     for(int i=0; i<=lapcount; i++)
     {
@@ -23,12 +23,12 @@ int Loopingcount()
         }
         else if(i==1)
         {
-        cout<<"Final laptime after "<<i<<" lap will be ";
+        cout<<"Laptime after "<<i<<" lap will be ";
         timeFormat(Laptime);
         cout<<"\n";
         }
         else{
-        cout<<"Final laptime after "<<i<<" laps will be ";
+        cout<<"Laptime after "<<i<<" laps will be ";
         timeFormat(Laptime);
         cout<<"\n";
         }
