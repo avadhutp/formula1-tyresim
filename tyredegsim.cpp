@@ -9,20 +9,21 @@ int Loopingcount(double track_temp) {
     int totalLaps;
     double baseLaptime = 120.0; 
 
-    // 1. Calculate the Strategy 
-    double lifeLimit = 12.0 - ((track_temp - 25.0) / 2.0);
-    if (lifeLimit < 5) lifeLimit = 5;
+    // Base: Assuming 18 laps at 30°C. 
+    // Sens: Lapses 1 lap of life for every 4 degrees extra.
+    double lifeLimit = 18.0 - ((track_temp - 30.0) / 4.0);
+    if (lifeLimit < 8) lifeLimit = 8; // Safety net to avoid crashing my pow function :(
 
     // 2. THE BRIEFING (Must be here to see it before input)
-    std::cout << "\n--- BRIDGE DATA RECEIVED ---" << std::endl;
-    std::cout << "Track Temp: " << track_temp << "C" << std::endl;
-    std::cout << "Estimated Tyre Life: " << lifeLimit << " Laps" << std::endl;
-    std::cout << "----------------------------" << std::endl;
+    cout << "\n--- TRACK DATA ---" << std::endl;
+    cout << "Track Temp: " << track_temp << "C" << std::endl;
+    cout << "Estimated Tyre Life: " << lifeLimit << " Laps" << std::endl;
+    cout << "----------------------------" << std::endl;
 
-    std::cout << "Enter laps for this stint: ";
-    std::cin >> totalLaps;
-    std::cout << "Enter base laptime (e.g., 120): ";
-    std::cin >> baseLaptime;
+    cout << "Enter laps for this stint: ";
+    cin >> totalLaps;
+    cout << "Enter base laptime (e.g., 120): ";
+    cin >> baseLaptime;
 
     for (int i = 1; i <= totalLaps; i++) {
         double warmUpGain = 1.5 * std::sqrt(i);
@@ -38,7 +39,7 @@ int Loopingcount(double track_temp) {
         
         // 3-SECOND WARNING SYSTEM 
         if (Laptime > (firstLaptime + 3.0)) {
-            std::cout << " [!]";
+            cout << " [!]";
         }
         
         std::cout << std::endl;
