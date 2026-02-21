@@ -53,7 +53,7 @@ int Loopingcount(double track_temp) {
     
     // 3-SECOND WARNING SYSTEM 
     // Triggers when the cliff makes the car 3s slower than the initial Lap 1 pace
-    if (Laptime > (firstLaptime + 2.0)) {
+    if (Laptime > (firstLaptime + 1.0)) {
         cout << " [!]";
     }
     

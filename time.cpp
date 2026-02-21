@@ -7,6 +7,6 @@ int timeFormat(double t)
  Minutes=(int)t / 60;
  Seconds=(int)t%60;
  Millis = round((t - (int)t) * 1000);
- cout<<Minutes<<"m "<<Seconds<<"s "<<Millis<<"ms";
+ cout<<Minutes<<":"<<Seconds<<":"<<Millis;
  return 0;
 }
