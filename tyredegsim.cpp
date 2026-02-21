@@ -25,26 +25,41 @@ int Loopingcount(double track_temp) {
     cout << "Enter base laptime (e.g., 120): ";
     cin >> baseLaptime;
 
-    for (int i = 1; i <= totalLaps; i++) {
-        double warmUpGain = 1.5 * std::sqrt(i);
-        double thermalCliff = std::pow((i / lifeLimit), 12);
+   for (int i = 1; i <= totalLaps; i++) {
+    // 1. THE PHYSICS FORCES
+    // The "Cliff": Exponential increase as we hit the lifeLimit
+    double thermalCliff = std::pow((i / lifeLimit), 12);
+    
+    // The "Fuel Gain": Car gets 0.07s faster every lap as it gets lighter
+    double fuelGain = i * 0.07; 
 
-        Laptime = baseLaptime - warmUpGain + thermalCliff;
-
-        // Capture Lap 1 benchmark
-        if (i == 1) firstLaptime = Laptime;
-
-        std::cout << "Lap " << i << ": ";
-        timeFormat(Laptime);
-        
-        // 3-SECOND WARNING SYSTEM 
-        if (Laptime > (firstLaptime + 3.0)) {
-            cout << " [!]";
-        }
-        
-        std::cout << std::endl;
-        totalStintTime += Laptime;
+    // The "Warm-up Penalty": Lap 1 is very cold, Lap 2 is getting there, Lap 3+ is optimal
+    double warmUpPenalty = 0.0;
+    if (i == 1) {
+        warmUpPenalty = 1.1; // 1.2s penalty for cold tires
+    } else if (i == 2) {
+        warmUpPenalty = 0.2; // 0.4s penalty as they bleed heat in
     }
+
+    // 2. THE CALCULATION
+    // Base Time + Penalty (Slows you down) - Fuel Gain (Speeds you up) + Cliff (Slows you down)
+    Laptime = baseLaptime + warmUpPenalty - fuelGain + thermalCliff;
+
+    // 3. BENCHMARKING & WARNINGS
+    if (i == 1) firstLaptime = Laptime;
+
+    std::cout << "Lap " << i << ": ";
+    timeFormat(Laptime);
+    
+    // 3-SECOND WARNING SYSTEM 
+    // Triggers when the cliff makes the car 3s slower than the initial Lap 1 pace
+    if (Laptime > (firstLaptime + 2.0)) {
+        cout << " [!]";
+    }
+    
+    std::cout << std::endl;
+    totalStintTime += Laptime;
+}
 
     return 0;
 }
