@@ -26,8 +26,8 @@ int Loopingcount(double track_temp) {
     cin >> baseLaptime;
 
    for (int i = 1; i <= totalLaps; i++) {
-    // 1. THE PHYSICS FORCES
-    // The "Cliff": Exponential increase as we hit the lifeLimit
+    // 1. Physics enginee
+    // The "Cliff": Exponential increase as tyres hit the lifeLimit
     double thermalCliff = std::pow((i / lifeLimit), 12);
     
     // The "Fuel Gain": Car gets 0.07s faster every lap as it gets lighter
