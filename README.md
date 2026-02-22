@@ -42,4 +42,4 @@ How to Setup the Build Shortcut:
 
 Dependencies: 
 
-Requires lsqlite3 for database connectivity.
+- lsqlite3: for database connectivity
